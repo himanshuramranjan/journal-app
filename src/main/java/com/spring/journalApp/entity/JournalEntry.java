@@ -9,16 +9,16 @@ import java.time.LocalDateTime;
 @Document(collection = "jounral-entries")
 public class JournalEntry {
     @Id
-    private ObjectId id;
+    private String id;
     private String title;
     private String content;
     private LocalDateTime date;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -36,9 +36,6 @@ public class JournalEntry {
 
     public void setContent(String content) {
         this.content = content;
-    }
-    public LocalDateTime getDate() {
-        return date;
     }
 
     public void setDate(LocalDateTime date) {

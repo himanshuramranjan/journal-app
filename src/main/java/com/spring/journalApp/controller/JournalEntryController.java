@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/journal")
@@ -28,8 +28,8 @@ public class JournalEntryController {
         journalEntryService.saveEntry(journalEntry);
         return journalEntry;
     }
-    @PutMapping("id/{myId}")
-    public JournalEntry updateEntry(@PathVariable ObjectId myId, @RequestBody JournalEntry newEntry) {
+    @PutMapping("/id/{myId}")
+    public JournalEntry updateEntry(@PathVariable String myId, @RequestBody JournalEntry newEntry) {
         JournalEntry oldEntry = journalEntryService.findById(myId).orElse(null);
         if(oldEntry != null) {
             oldEntry.setTitle(newEntry.getTitle() != null && !newEntry.getTitle().isEmpty() ? newEntry.getTitle() : oldEntry.getTitle());
@@ -38,12 +38,12 @@ public class JournalEntryController {
         journalEntryService.saveEntry(oldEntry);
         return oldEntry;
     }
-    @GetMapping("id/{myId}")
-    public JournalEntry getJournalEntryById(@PathVariable ObjectId myId) {
+    @GetMapping("/id/{myId}")
+    public JournalEntry getJournalEntryById(@PathVariable String myId) {
         return journalEntryService.findById(myId).orElse(null);
     }
-    @DeleteMapping("id/{myId}")
-    public boolean deleteJournalById(@PathVariable ObjectId myId) {
+    @DeleteMapping("/id/{myId}")
+    public boolean deleteJournalById(@PathVariable String myId) {
         journalEntryService.deleteById(myId);
         return true;
     }
