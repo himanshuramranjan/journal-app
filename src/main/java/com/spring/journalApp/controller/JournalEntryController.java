@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/journal")
+@RequestMapping("/api/v1/journal")
 public class JournalEntryController {
 
     @Autowired
