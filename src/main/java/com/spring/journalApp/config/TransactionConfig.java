@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class TransactionConfig {
     @Bean
     public PlatformTransactionManager createDBTransactionManager(MongoDatabaseFactory mongoDatabaseFactory) {
+                                                                // MongoDBFactory -> helps to connect w/ MongoDB
+                                                                // and it creates session with DB
+
+        // return an implementation of PlatformTransactionManager which maintain txn session (@Transactional)
         return  new MongoTransactionManager(mongoDatabaseFactory);
     }
 }

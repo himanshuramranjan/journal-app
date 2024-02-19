@@ -21,7 +21,7 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
-    @Transactional
+    @Transactional      // either execute all the db calls  or fails completely -> Atomicity
     public void saveEntry(JournalEntry journalEntry, String userName) {
 
         try {
@@ -42,6 +42,7 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
+    @Transactional
     public void deleteById(String myId, String userName) {
         User user = userService.findByUserName(userName);
         user.getJournalEntries().removeIf(x -> x.getId().equals(myId));
