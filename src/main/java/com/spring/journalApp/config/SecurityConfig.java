@@ -35,9 +35,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable) // disable cross site attack
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**") // whitelist URL
-                    .permitAll()
-                        .requestMatchers("/api/v1/user/**").hasAuthority(Role.USER.name())
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/user/**").hasAnyAuthority(Role.USER.name())
                         .requestMatchers("/api/v1/journal/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
                         .anyRequest().authenticated()) // all other from whitelist URL need to be authenticated
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
